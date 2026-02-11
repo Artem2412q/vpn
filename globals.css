@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* ---------------------------------------
+   ТЕМА/ЦВЕТА — правь тут
+   --------------------------------------- */
+:root {
+  color-scheme: dark;
+  --bg0: 8 10 18;
+  --bg1: 10 14 26;
+
+  /* спокойный “неон”, без кислотности */
+  --accent: 190 242 220;    /* mint */
+  --accent2: 165 210 255;   /* soft blue */
+
+  --text: 243 244 246;
+  --muted: 170 184 210;
+
+  --glass: 255 255 255;
+  --glass-a: 0.06;
+
+  --ring: 255 255 255;
+  --ring-a: 0.25;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(var(--accent2) / 0.08), transparent 60%),
+    radial-gradient(900px 600px at 70% 0%, rgba(var(--accent) / 0.06), transparent 55%),
+    radial-gradient(900px 700px at 50% 80%, rgba(255 255 255 / 0.03), transparent 60%),
+    linear-gradient(180deg, rgb(var(--bg0)), rgb(var(--bg1)));
+  color: rgb(var(--text));
+}
+
+::selection {
+  background: rgba(var(--accent) / 0.18);
+}
+
+/* фокус — заметный, но спокойный */
+:focus-visible {
+  outline: 2px solid rgba(var(--ring) / var(--ring-a));
+  outline-offset: 2px;
+}
+
+/* лёгкий “стеклянный” слой */
+.glass {
+  background: rgba(var(--glass) / var(--glass-a));
+  border: 1px solid rgba(255 255 255 / 0.10);
+  backdrop-filter: blur(12px);
+}
+
+/* UI-настроение при включенном VPN */
+:root[data-vpn="on"] .vpn-mood {
+  box-shadow:
+    0 0 0 1px rgba(var(--accent) / 0.16),
+    0 10px 30px rgba(var(--accent) / 0.08);
+}
+
+:root[data-vpn="on"] .vpn-glow {
+  text-shadow: 0 0 18px rgba(var(--accent) / 0.18);
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
